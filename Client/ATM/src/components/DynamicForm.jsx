@@ -20,6 +20,7 @@ export default function DynamicForm() {
 
   return (
     <div>
+      <h1>DynamicForm Here</h1>
       <button onClick={() => addField("text")}>Text</button>
       <button onClick={() => addField("number")}>Number</button>
 

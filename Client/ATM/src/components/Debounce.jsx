@@ -37,6 +37,7 @@ export default function DebounceSearch() {
 
   return (
     <div>
+      <h1>Debounce Search</h1>
       <input
         placeholder="Search user..."
         onChange={(e) => setQuery(e.target.value)}

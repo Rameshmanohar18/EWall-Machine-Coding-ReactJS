@@ -159,6 +159,19 @@ import DynamicForm from "./components/DynamicForm";
 import ShoppingCart from "./components/ShoppingCart"
 import ModalManager from "./components/ModalManager";
 import PaginationTable from "./components/Pagination";
+import GmailClone from "./components/GmailClone";
+import OTPInput from "./components/OTPInput";
+import MultiStepForm from "./components/MultiStepForm";
+import DataTable from "./components/DataTable";
+import AutoComplete from "./components/AutoComplete";
+import FileExplorer from "./components/FileExplorer";
+import { useTheme } from "./components/ThemeToggle";
+import GoogleDocs from "./components/GoogleDocs"
+import Chat from "./components/Chat";
+import UndoRedo from "./components/UndoRedo";
+import MiniReactRouter from "./components/MiniReactRouter"
+
+
 
 
 function App() {
@@ -181,16 +194,60 @@ function App() {
         <Login setIsLoggedIn={setIsLoggedIn} />
       )}
      <ATM/>
+     <br></br>
      <Pattern/>
+        <br></br>
      <CRUD_add/>
+        <br></br>
      <UL_LI/>
+        <br></br>
 <Spreadsheet/>
+   <br></br>
 <ShoppingCart/>
+   <br></br>
 <DebounceSearch/>
+   <br></br>
 <DynamicForm/>
+   <br></br>
 <Kanban/>
+   <br></br>
 <ModalManager/>
+   <br></br>
 <PaginationTable/>
+   <br></br>
+
+
+
+
+<GmailClone/>
+   <br></br>
+
+<OTPInput/>
+   <br></br>
+
+<MultiStepForm/>
+   <br></br>
+
+<DataTable/>
+   <br></br>
+
+<AutoComplete/>
+   <br></br>
+
+<FileExplorer/>
+   <br></br>
+
+<GoogleDocs/>
+   <br></br>
+
+<Chat/> 
+   <br></br>
+
+<UndoRedo/>
+   <br></br>
+
+<MiniReactRouter/>
+   <br></br>
 <InfiniteScroll/>
     </div>
   );

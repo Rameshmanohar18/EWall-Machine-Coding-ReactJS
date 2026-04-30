@@ -15,10 +15,18 @@ export default function PaginationTable() {
   const current = data.slice(start, start + size);
 
   return (
+    <>
     <div>
+      <h1>Pagination Here </h1>
       <select onChange={(e) => setSize(Number(e.target.value))}>
         <option>5</option>
         <option>10</option>
+        <option>15</option>
+        <option>20</option>
+        <option>25</option>
+        <option>30</option>
+        <option>35</option>
+        <option>40</option>
       </select>
 
       {current.map((item) => (
@@ -32,5 +40,8 @@ export default function PaginationTable() {
         Next
       </button>
     </div>
+    
+    </>
+    
   );
 }

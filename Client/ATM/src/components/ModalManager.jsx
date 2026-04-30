@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 export default function ModalManager() {
   const [open, setOpen] = useState(false);
 
   return (
     <div>
+      <h1>Modal manager Here </h1>
       <button onClick={() => setOpen(true)}>Open Modal</button>
 
       {open && (

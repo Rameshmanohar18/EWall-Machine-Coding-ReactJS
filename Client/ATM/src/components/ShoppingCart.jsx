@@ -26,6 +26,7 @@ export default function Cart() {
 
   return (
     <div>
+      <h1>ShoppingCart here!!</h1>
       {products.map(p => (
         <button key={p.id} onClick={() => add(p)}>
           Add {p.name}

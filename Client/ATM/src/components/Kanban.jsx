@@ -33,7 +33,9 @@ export default function Kanban() {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+<div>
+  <h1>Kanban Here</h1>
+  <DragDropContext onDragEnd={onDragEnd}>
       <div style={{ display: "flex", gap: 20 }}>
         {Object.keys(columns).map((col) => (
           <Droppable droppableId={col} key={col}>
@@ -65,5 +67,8 @@ export default function Kanban() {
         ))}
       </div>
     </DragDropContext>
+
+</div>
+  
   );
 }
