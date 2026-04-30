@@ -1,7 +1,7 @@
 
 
 
-import React, { useState } from "react";
+import{ useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const initialData = {
@@ -52,7 +52,7 @@ export default function Kanban() {
                         style={{
                           padding: 10,
                           margin: 5,
-                          background: "#eee"
+                          background: "#038f3b"
                         }}
                       >
                         {task}

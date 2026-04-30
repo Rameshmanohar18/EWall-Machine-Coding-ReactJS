@@ -144,7 +144,7 @@
 
 // export default App;
 
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import ATM from "./components/ATM";

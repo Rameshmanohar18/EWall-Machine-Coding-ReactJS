@@ -15,7 +15,7 @@ function Node({node}){
 
  return(
   <div style={{marginLeft:20}}>
-    {/* <h1>FileExplorer Here</h1> */}
+    <h1>FileExplorer Here</h1>
    <p onClick={()=>setOpen(!open)}>{node.name}</p>
    {open && node.children?.map((c,i)=>
      <Node key={i} node={c}/>

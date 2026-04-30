@@ -14,6 +14,7 @@ export default function Router() {
 
   return(
     <>
+    <h2>Mini React router here</h2>
       <button onClick={()=>navigate("/about")}>About</button>
 
       {path==="/" && <h1>Home</h1>}

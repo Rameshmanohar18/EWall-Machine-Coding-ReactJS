@@ -9,7 +9,7 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
 
   const add = (product) => {
-    const exists = cart.find((c) => c.id === pwroduct.id);
+    const exists = cart.find((c) => c.id === product.id);
     if (exists) {
       setCart(cart.map(c =>
         c.id === product.id ? { ...c, qty: c.qty + 1 } : c

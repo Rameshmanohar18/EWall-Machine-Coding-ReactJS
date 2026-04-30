@@ -27,6 +27,7 @@ export default function Chat() {
 
   return (
     <>
+    <h1>Chat Here@</h1>
       {messages.map((m, i) => (
         <p key={i}>
           {m.text} ({m.status})

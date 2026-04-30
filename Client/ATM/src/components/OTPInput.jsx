@@ -11,7 +11,7 @@ export default function OTPInput() {
 
   return (
     <div>
-        <h1>OTP Input Here</h1>
+        <h1 className="btn btn-success">OTP Input Here</h1>
       {[...Array(6)].map((_, i) => (
         <input
           key={i}

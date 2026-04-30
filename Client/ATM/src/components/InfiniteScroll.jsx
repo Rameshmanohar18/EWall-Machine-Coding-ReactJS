@@ -29,7 +29,7 @@ export default function InfiniteScroll() {
 
   return (
     <>
-    <h1>InfiniteScroll Here</h1>
+    <h1>Infinite Scroll Here</h1>
      <div>
       {items.map(i => (
         <p key={i.id}>{i.title}</p>
