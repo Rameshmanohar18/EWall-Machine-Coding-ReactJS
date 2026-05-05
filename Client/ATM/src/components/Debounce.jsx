@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 
 export default function DebounceSearch() {
@@ -12,9 +10,7 @@ export default function DebounceSearch() {
 
     const timer = setTimeout(() => {
       if (!query) return;
-
       setLoading(true);
-
       fetch(`https://jsonplaceholder.typicode.com/users`, {
         signal: controller.signal
       })
@@ -29,6 +25,7 @@ export default function DebounceSearch() {
         });
     }, 500);
 
+// Clean up component 
     return () => {
       clearTimeout(timer);
       controller.abort();
@@ -42,6 +39,7 @@ export default function DebounceSearch() {
         placeholder="Search user..."
         onChange={(e) => setQuery(e.target.value)}
       />
+      
       {loading && <p>Loading...</p>}
       {users.map((u) => (
         <p key={u.id}>{u.name}</p>

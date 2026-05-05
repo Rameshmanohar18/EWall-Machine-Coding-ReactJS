@@ -7,7 +7,7 @@ export default function InfiniteScroll() {
 
   useEffect(() => {
     fetch(
-      `https://jsonplaceholder.typicode.com/posts?_limit=5&_page=${page}`
+      `https://jsonplaceholder.typicode.com/photos?_limit=5&_page=${page}`
     )
       .then(res => res.json())
       .then(data => setItems(prev => [...prev, ...data]));
