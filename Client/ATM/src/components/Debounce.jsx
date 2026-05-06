@@ -7,43 +7,39 @@ export default function DebounceSearch() {
 
   useEffect(() => {
     const controller = new AbortController();
-
     const timer = setTimeout(() => {
-      if (!query) return;
+      if (!query) { setUsers([]); return; }
       setLoading(true);
-      fetch(`https://jsonplaceholder.typicode.com/users`, {
-        signal: controller.signal
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUsers(
-            data.filter((u) =>
-              u.name.toLowerCase().includes(query.toLowerCase())
-            )
-          );
+      fetch("https://jsonplaceholder.typicode.com/users", { signal: controller.signal })
+        .then(r => r.json())
+        .then(data => {
+          setUsers(data.filter(u => u.name.toLowerCase().includes(query.toLowerCase())));
           setLoading(false);
-        });
+        })
+        .catch(() => {});
     }, 500);
-
-// Clean up component 
-    return () => {
-      clearTimeout(timer);
-      controller.abort();
-    };
+    return () => { clearTimeout(timer); controller.abort(); };
   }, [query]);
 
   return (
-    <div>
-      <h1>Debounce Search</h1>
-      <input
-        placeholder="Search user..."
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      
-      {loading && <p>Loading...</p>}
-      {users.map((u) => (
-        <p key={u.id}>{u.name}</p>
-      ))}
+    <div className="card">
+      <h2 className="card-title">🔍 Debounce Search</h2>
+
+      <div className="form-row">
+        <input className="input" placeholder="Search users..." onChange={(e) => setQuery(e.target.value)} />
+      </div>
+
+      {loading && (
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--s2)", color: "var(--t2)", padding: "var(--s3) 0" }}>
+          <span className="spinner" /> Searching...
+        </div>
+      )}
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--s1)" }}>
+        {users.map(u => (
+          <div key={u.id} className="result-item">{u.name}</div>
+        ))}
+      </div>
     </div>
   );
 }

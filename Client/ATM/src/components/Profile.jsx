@@ -1,38 +1,16 @@
-// // import React from "react";
-
-// function Profile({ setIsLoggedIn }) {
-
-//   const logout = () => {
-//     localStorage.removeItem("user");
-//     setIsLoggedIn(false);
-//   };
-
-//   return (
-//     <div style={{ textAlign: "center", marginTop: 100 }}>
-//       <h2>Profile Page</h2>
-
-//       <h3>✅ Login Successful</h3>
-
-//       <button onClick={logout}>Logout</button>
-//     </div>
-//   );
-// }
-
-// export default Profile;
 function Profile({ setIsLoggedIn }) {
-
   const handleLogout = () => {
-    localStorage.removeItem("user"); // remove session
+    localStorage.removeItem("user");
     setIsLoggedIn(false);
   };
 
   return (
-    <div>
-      <h2>Login Successful ✅</h2>
-
-      <button onClick={handleLogout}>
-        Logout
-      </button>
+    <div className="card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div>
+        <h2 style={{ marginBottom: 4 }}>Welcome back, Admin 👋</h2>
+        <p>You are logged in successfully.</p>
+      </div>
+      <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
     </div>
   );
 }

@@ -1,168 +1,69 @@
-// import  { useState } from "react";
-
-// function ATM() {
-//   const [balance, setBalance] = useState(1000);
-//   const [amount, setAmount] = useState("");
-
-//   const deposit = () => {
-//     const value = Number(amount);
-//     if (value <= 0) return;
-
-//     setBalance(balance + value);
-//     setAmount("");
-//   };
-
-//   const withdraw = () => {
-//     const value = Number(amount);
-
-//     if (value > balance) {
-//       alert("Insufficient Balance");
-//       return;
-//     }
-
-//     setBalance(balance - value);
-//     setAmount("");
-//   };
-
-//   return (
-//     <div style={{ padding: 30 }}>
-//       <h2>Bank Account</h2>
-
-//       <h3>Balance: ₹{balance}</h3>
-
-//       <input
-//         type="number"
-//         placeholder="Enter Amount"
-//         value={amount}
-//         onChange={(e) => setAmount(e.target.value)}
-//       />
-
-//       <br /><br />
-
-//       <button onClick={deposit}>Deposit</button>
-//       <button onClick={withdraw}>Withdraw</button>
-//     </div>
-//   );
-// }
-
-// export default ATM;
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ATM() {
   const CORRECT_PIN = "1234";
-
   const [pin, setPin] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const [balance, setBalance] = useState(5000);
   const [amount, setAmount] = useState("");
 
-  // 🔐 PIN LOGIN
   const handleLogin = () => {
-    if (pin === CORRECT_PIN) {
-      setIsAuthenticated(true);
-      toast.success("ATM Unlocked ✅");
-    } else {
-      toast.error("Invalid PIN ❌");
-    }
+    if (pin === CORRECT_PIN) { setIsAuthenticated(true); toast.success("ATM Unlocked ✅"); }
+    else toast.error("Invalid PIN ❌");
   };
 
-  // 💰 Deposit
   const deposit = () => {
-    const value = Number(amount);
-
-    if (value <= 0 || !value) {
-      toast.warning("Enter valid amount");
-      return;
-    }
-
-    setBalance(prev => prev + value);
-    setAmount("");
-    toast.success("Deposit successful 💵");
+    const v = Number(amount);
+    if (!v || v <= 0) { toast.warning("Enter valid amount"); return; }
+    setBalance(p => p + v); setAmount(""); toast.success("Deposit successful 💵");
   };
 
-  // 💸 Withdraw
   const withdraw = () => {
-    const value = Number(amount);
-
-    if (value <= 0 || !value) {
-      toast.warning("Enter valid amount");
-      return;
-    }
-
-    if (value > balance) {
-      toast.error("Insufficient balance");
-      return;
-    }
-
-    setBalance(prev => prev - value);
-    setAmount("");
-    toast.success("Withdraw successful 💸");
+    const v = Number(amount);
+    if (!v || v <= 0) { toast.warning("Enter valid amount"); return; }
+    if (v > balance) { toast.error("Insufficient balance"); return; }
+    setBalance(p => p - v); setAmount(""); toast.success("Withdraw successful 💸");
   };
 
-  // 🏦 Show Balance
-  const showBalance = () => {
-    toast.info(`Current balance is ₹${balance}`);
-  };
-
-  // 🔐 PIN SCREEN
   if (!isAuthenticated) {
     return (
-      <div style={{ padding: 30 }}>
-        <h2>Enter ATM PIN</h2>
-
-        <input
-          type="password"
-          placeholder="Enter PIN"
-          value={pin}
-          onChange={(e) => setPin(e.target.value)}
-        />
-
-        <br /><br />
-
-        <button onClick={handleLogin}>Login</button>
-
-        <ToastContainer />
+      <div className="card" style={{ maxWidth: 420, margin: "0 auto" }}>
+        <h2 className="card-title">🏧 ATM — Enter PIN</h2>
+        <div className="form-row">
+          <label className="label">PIN</label>
+          <input className="input" type="password" placeholder="Enter 4-digit PIN"
+            value={pin} onChange={(e) => setPin(e.target.value)} />
+        </div>
+        <button className="btn btn-primary" style={{ width: "100%" }} onClick={handleLogin}>Unlock ATM</button>
+        <ToastContainer theme="dark" />
       </div>
     );
   }
 
-  // 🏧 ATM DASHBOARD
   return (
-    <div style={{ padding: 30 }}>
-      <h2>ATM Machine</h2>
+    <div className="card">
+      <h2 className="card-title">🏧 ATM Machine</h2>
 
-      {/* Balance Card */}
-      <div
-        style={{
-          border: "1px solid #ccc",
-          padding: 20,
-          width: 250,
-          borderRadius: 10,
-          marginBottom: 20,
-          boxShadow: "0 0 10px #ddd"
-        }}
-      >
-        <h3>Account Balance</h3>
-        <h2>₹{balance}</h2>
+      <div className="balance-card">
+        <div className="balance-label">Account Balance</div>
+        <div className="balance-amount">₹{balance.toLocaleString()}</div>
       </div>
 
-      <input
-        type="number"
-        placeholder="Enter Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
+      <div className="form-row">
+        <label className="label">Amount</label>
+        <input className="input" type="number" placeholder="Enter amount"
+          value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </div>
 
-      <br /><br />
+      <div style={{ display: "flex", gap: "var(--s3)", flexWrap: "wrap" }}>
+        <button className="btn btn-success" onClick={deposit}>💵 Deposit</button>
+        <button className="btn btn-danger"  onClick={withdraw}>💸 Withdraw</button>
+        <button className="btn btn-info"    onClick={() => toast.info(`Balance: ₹${balance}`)}>👁 Balance</button>
+      </div>
 
-      <button onClick={deposit}>Deposit</button>
-      <button onClick={withdraw}>Withdraw</button>
-      <button onClick={showBalance}>Show Balance</button>
-
-      <ToastContainer />
+      <ToastContainer theme="dark" />
     </div>
   );
 }

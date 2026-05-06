@@ -8,41 +8,37 @@ export default function PaginationTable() {
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
-      .then(json => setData(json.products)); // ✅ extract the array
+      .then(json => setData(json.products));
   }, []);
 
   const totalPages = Math.ceil(data.length / size);
-  const start = (page - 1) * size;
-  const current = data.slice(start, start + size);
+  const current = data.slice((page - 1) * size, page * size);
 
-  const handleSizeChange = (e) => {
-    setSize(Number(e.target.value));
-    setPage(1); // ✅ reset to page 1 when page size changes
-  };
+  const handleSizeChange = (e) => { setSize(Number(e.target.value)); setPage(1); };
 
   return (
-    <div>
-      <h1>Pagination</h1>
+    <div className="card">
+      <h2 className="card-title">📄 Pagination</h2>
 
-      <select onChange={handleSizeChange} value={size}>
-        {[5, 10, 15, 20, 25, 30, 35, 40].map(n => (
-          <option key={n} value={n}>{n} per page</option>
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--s3)", marginBottom: "var(--s5)" }}>
+        <label className="label" style={{ margin: 0 }}>Per page:</label>
+        <select className="select" style={{ width: "auto" }} onChange={handleSizeChange} value={size}>
+          {[5, 10, 15, 20, 25, 30].map(n => (
+            <option key={n} value={n}>{n}</option>
+          ))}
+        </select>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--s2)", marginBottom: "var(--s5)" }}>
+        {current.map((item) => (
+          <div key={item.id} className="scroll-item" style={{ margin: 0 }}>{item.title}</div>
         ))}
-      </select>
+      </div>
 
-      {current.map((item) => (
-        <p key={item.id}>{item.title}</p>
-      ))}
-
-      <div>
-        <button onClick={() => setPage(p => p - 1)} disabled={page === 1}>
-          Prev
-        </button>
-        <span> Page {page} of {totalPages} </span>
-        <button onClick={() => setPage(p => p + 1)} disabled={page >= totalPages}>
-          {/* ✅ disable Next on last page */}
-          Next
-        </button>
+      <div className="pg-wrap">
+        <button className="pg-btn" onClick={() => setPage(p => p - 1)} disabled={page === 1}>← Prev</button>
+        <span className="pg-info">Page {page} of {totalPages}</span>
+        <button className="pg-btn" onClick={() => setPage(p => p + 1)} disabled={page >= totalPages}>Next →</button>
       </div>
     </div>
   );

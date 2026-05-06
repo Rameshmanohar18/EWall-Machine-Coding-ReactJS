@@ -1,47 +1,3 @@
-// import  { useState } from "react";
-
-// function Login() {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   const handleLogin = () => {
-//     if (username === "admin" && password === "admin") {
-//       setIsLoggedIn(true);
-//     } else {
-//       alert("Invalid Credentials");
-//     }
-//   };
-
-//   if (isLoggedIn) {
-//     return <h2>Welcome Admin ✅</h2>;
-//   }
-
-//   return (
-//     <div>
-//       <h2>Login Page</h2>
-
-//       <input
-//         placeholder="Username"
-//         onChange={(e) => setUsername(e.target.value)}
-//       />
-
-//       <br /><br />
-
-//       <input
-//         type="password"
-//         placeholder="Password"
-//         onChange={(e) => setPassword(e.target.value)}
-//       />
-
-//       <br /><br />
-
-//       <button onClick={handleLogin}>Login</button>
-//     </div>
-//   );
-// }
-
-// export default Login;
 import { useState } from "react";
 
 function Login({ setIsLoggedIn }) {
@@ -50,7 +6,7 @@ function Login({ setIsLoggedIn }) {
 
   const handleLogin = () => {
     if (username === "admin" && password === "admin") {
-      localStorage.setItem("user", "admin"); // persist login
+      localStorage.setItem("user", "admin");
       setIsLoggedIn(true);
     } else {
       alert("Invalid Credentials");
@@ -58,25 +14,31 @@ function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <div>
-      <h2>Login Page</h2>
+    <div className="card" style={{ maxWidth: 420, margin: "0 auto" }}>
+      <h2 className="card-title">🔐 Login</h2>
 
-      <input
-        placeholder="Username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <div className="form-row">
+        <label className="label">Username</label>
+        <input
+          className="input"
+          placeholder="Enter username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
 
-      <br /><br />
+      <div className="form-row">
+        <label className="label">Password</label>
+        <input
+          className="input"
+          type="password"
+          placeholder="Enter password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      <br /><br />
-
-      <button onClick={handleLogin}>Login</button>
+      <button className="btn btn-primary" style={{ width: "100%" }} onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 }

@@ -3,9 +3,7 @@ import { useState } from "react";
 export default function DynamicForm() {
   const [fields, setFields] = useState([]);
 
-  const addField = (type) => {
-    setFields([...fields, { type, value: "" }]);
-  };
+  const addField = (type) => setFields([...fields, { type, value: "" }]);
 
   const update = (i, val) => {
     const copy = [...fields];
@@ -13,26 +11,28 @@ export default function DynamicForm() {
     setFields(copy);
   };
 
-  const submit = () => {
-    console.log(fields);
-    alert(JSON.stringify(fields));
-  };
+  const submit = () => alert(JSON.stringify(fields, null, 2));
 
   return (
-    <div>
-      <h1>DynamicForm Here</h1>
-      <button onClick={() => addField("text")}>Text</button>
-      <button onClick={() => addField("number")}>Number</button>
+    <div className="card">
+      <h2 className="card-title">⚡ Dynamic Form</h2>
 
-      {fields.map((f, i) => (
-        <input
-          key={i}
-          type={f.type}
-          onChange={(e) => update(i, e.target.value)}
-        />
-      ))}
+      <div style={{ display: "flex", gap: "var(--s3)", marginBottom: "var(--s5)" }}>
+        <button className="btn btn-primary" onClick={() => addField("text")}>+ Text Field</button>
+        <button className="btn btn-info"    onClick={() => addField("number")}>+ Number Field</button>
+      </div>
 
-      <button onClick={submit}>Submit</button>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--s3)", marginBottom: "var(--s5)" }}>
+        {fields.map((f, i) => (
+          <input key={i} className="input" type={f.type}
+            placeholder={`${f.type} field ${i + 1}`}
+            onChange={(e) => update(i, e.target.value)} />
+        ))}
+      </div>
+
+      {fields.length > 0 && (
+        <button className="btn btn-success" onClick={submit}>Submit</button>
+      )}
     </div>
   );
 }

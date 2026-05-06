@@ -1,28 +1,43 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 
-export default function AutoComplete(){
- const[q,setQ]=useState("");
- const[result,setResult]=useState([]);
+export default function AutoComplete() {
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
- useEffect(()=>{
-  const timer=setTimeout(()=>{
-   fetch("https://jsonplaceholder.typicode.com/users")
-   .then(r=>r.json())
-   .then(data=>{
-     setResult(
-      data.filter(u=>u.name.toLowerCase()
-      .includes(q.toLowerCase()))
-     );
-   });
-  },500);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!q) { setResults([]); return; }
+      setLoading(true);
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(r => r.json())
+        .then(data => {
+          setResults(data.filter(u => u.name.toLowerCase().includes(q.toLowerCase())));
+          setLoading(false);
+        });
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [q]);
 
-  return()=>clearTimeout(timer);
- },[q]);
+  return (
+    <div className="card">
+      <h2 className="card-title">🔎 AutoComplete</h2>
 
- return(
-  <>
-   <input onChange={e=>setQ(e.target.value)}/>
-   {result.map(r=><p key={r.id}>{r.name}</p>)}
-  </>
- );
+      <div className="form-row">
+        <input className="input" placeholder="Type a name..." onChange={e => setQ(e.target.value)} />
+      </div>
+
+      {loading && (
+        <div style={{ display:"flex", alignItems:"center", gap:"var(--s2)", color:"var(--t2)", padding:"var(--s2) 0" }}>
+          <span className="spinner" /> Searching...
+        </div>
+      )}
+
+      <div style={{ display:"flex", flexDirection:"column", gap:"var(--s1)" }}>
+        {results.map(r => (
+          <div key={r.id} className="result-item">{r.name}</div>
+        ))}
+      </div>
+    </div>
+  );
 }

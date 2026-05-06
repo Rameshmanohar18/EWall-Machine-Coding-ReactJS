@@ -1,27 +1,24 @@
-import  { useState } from "react";
+import { useState } from "react";
 
 export default function ModalManager() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
-      <h1>Modal manager Here </h1>
-      <button onClick={() => setOpen(true)}>Open Modal</button>
+    <div className="card">
+      <h2 className="card-title">🪟 Modal Manager</h2>
+      <button className="btn btn-primary" onClick={() => setOpen(true)}>Open Modal</button>
 
       {open && (
-        <div style={{
-          position:"fixed",
-          top:0,left:0,right:0,bottom:0,
-          background:"rgba(0,0,0,0.5)"
-        }}>
-          <div style={{
-            background:"white",
-            padding:20,
-            margin:"100px auto",
-            width:300
-          }}>
-            <h3>Modal Content</h3>
-            <button onClick={()=>setOpen(false)}>Close</button>
+        <div className="overlay" onClick={() => setOpen(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">✨ Modal Content</h3>
+            <p className="modal-body">
+              This is a glassmorphism modal. Click outside or close to dismiss.
+            </p>
+            <div className="modal-foot">
+              <button className="btn btn-ghost" onClick={() => setOpen(false)}>Cancel</button>
+              <button className="btn btn-primary" onClick={() => setOpen(false)}>Confirm</button>
+            </div>
           </div>
         </div>
       )}
